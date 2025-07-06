@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mirrora | Smart Mirrors for Modern Living</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #f1f1f1;
+            --light-bg: #f8f8f8;
+            --dark-text: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: var(--text);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .logo span {
+            color: var(--highlight);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--highlight);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--highlight);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .cart-icon {
+            color: var(--text);
+            font-size: 1.3rem;
+            margin-left: 1.5rem;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--highlight);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80') no-repeat center center/cover;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--highlight);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--highlight);
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background: var(--highlight);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--highlight);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 5rem 5%;
+            background-color: var(--light-bg);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--highlight);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-info .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .product-info .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-left: 0.5rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+        
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .wishlist-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .wishlist-btn:hover, .wishlist-btn.active {
+            color: var(--highlight);
+        }
+        
+        /* Mirror Customizer */
+        .customizer {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text);
+        }
+        
+        .customizer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .customizer-preview {
+            position: relative;
+            height: 400px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .mirror-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mirror-display .time {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .mirror-display .weather {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+        }
+        
+        .customizer-options {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .option-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .option-group h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .size-option {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .size-option:hover, .size-option.active {
+            background: var(--highlight);
+        }
+        
+        .frame-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .frame-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .frame-option:hover, .frame-option.active {
+            border-color: var(--highlight);
+            transform: scale(1.1);
+        }
+        
+        .frame-1 { background: #333; }
+        .frame-2 { background: #a8a8a8; }
+        .frame-3 { background: #e0c9a6; }
+        .frame-4 { background: #1a1a2e; }
+        .frame-5 { background: #b8860b; }
+        
+        .addon-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .addon-option {
+            display: flex;
+            align-items: center;
+        }
+        
+        .addon-option input {
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .customizer-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            background: var(--primary);
+            color: white;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .cart-item-details h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            color: var(--highlight);
+            font-weight: 600;
+        }
+        
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-summary {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+        
+        .cart-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-top: 1px solid #ddd;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .cart-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        /* Login Modal */
+        .login-modal .modal-content {
+            max-width: 500px;
+        }
+        
+        .login-tabs {
+            display: flex;
+            margin-bottom: 1.5rem;
+        }
+        
+        .login-tab {
+            flex: 1;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .login-tab.active {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .login-form {
+            display: none;
+        }
+        
+        .login-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        
+        .forgot-password {
+            color: var(--highlight);
+            text-decoration: none;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .testimonials-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+        
+        .testimonial.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--highlight);
+        }
+        
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+        
+        .author-title {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .slider-dot.active {
+            background: var(--highlight);
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 5rem 5%;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            color: var(--text);
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--text);
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--highlight);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--highlight);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--highlight);
+            transform: translateY(-3px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            background: var(--highlight);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: #d13354;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .customizer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .customizer-preview {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--primary);
+                padding: 1rem 5%;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s;
+            }
+            
+            nav.active {
+                transform: translateY(0);
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .cart-item-info {
+                width: 100%;
+            }
+            
+            .cart-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2rem;
+            }
+            
+            .customizer-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">Mirrora<span>.</span></a>
+            
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#customizer">Customizer</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Smart Mirrors for Smarter Living</h1>
+            <p>Transform your morning routine with our cutting-edge smart mirrors that blend seamlessly into your home while providing the technology you need to start your day right.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn">Shop Now</a>
+                <a href="#customizer" class="btn btn-outline">Customize Yours</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Why Choose Our Smart Mirrors</h2>
+            <p>Our mirrors combine elegant design with powerful technology to enhance your daily routine.</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Voice Control</h3>
+                <p>Control your mirror with simple voice commands using Alexa or Google Assistant integration.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud-sun"></i>
+                </div>
+                <h3>Weather & News</h3>
+                <p>Get real-time weather updates, news headlines, and calendar events as you get ready.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>Smart Lighting</h3>
+                <p>Adjustable lighting that perfectly mimics natural light for flawless makeup and grooming.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>App Integration</h3>
+                <p>Connect with your favorite apps like Spotify, YouTube, and fitness trackers.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3>Privacy Focused</h3>
+                <p>Camera and microphone can be disabled with a single tap for complete privacy.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Modular Design</h3>
+                <p>Upgrade components over time as technology advances without replacing the entire mirror.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Our Smart Mirror Collection</h2>
+            <p>Find the perfect smart mirror for your space and lifestyle.</p>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-badge">Bestseller</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1583845112203-29329902330b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80" alt="Essentia Smart Mirror">
+                </div>
+                <div class="product-info">
+                    <h3>Essentia</h3>
+                    <span class="price">$599 <span class="old-price">$799</span></span>
+                    <p>The perfect entry point into smart mirrors with all essential features.</p>
+                    <div class="product-actions">
+                        <button class="btn btn-sm add-to-cart" data-id="1" data-name="Essentia Smart Mirror" data-price="599" data-image="https://images.unsplash.com/photo-1583845112203-29329902330b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80">Add to Cart</button>
+                        <button class="wishlist-btn" data-id="1"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1556740734-7f3a7d7d0aae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80" alt="Lumina Smart Mirror">
+                </div>
+                <div class="product-info">
+                    <h3>Lumina</h3>
+                    <span class="price">$899</span>
+                    <p>Professional-grade lighting with advanced skin analysis technology.</p>
+                    <div class="product-actions">
+                        <button class="btn btn-sm add-to-cart" data-id="2" data-name="Lumina Smart Mirror" data-price="899" data-image="https://images.unsplash.com/photo-1556740734-7f3a7d7d0aae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80">Add to Cart</button>
+                        <button class="wishlist-btn" data-id="2"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-badge">New</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80" alt="Infiniti Smart Mirror">
+                </div>
+                <div class="product-info">
+                    <h3>Infiniti</h3>
+                    <span class="price">$1,299</span>
+                    <p>Our flagship model with the largest display and premium materials.</p>
+                    <div class="product-actions">
+                        <button class="btn btn-sm add-to-cart" data-id="3" data-name="Infiniti Smart Mirror" data-price="1299" data-image="https://images.unsplash.com/photo-1556228578-8c89e6adf883?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80">Add to Cart</button>
+                        <button class="wishlist-btn" data-id="3"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1556740734-7f3a7d7d0aae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80" alt="Vanity Smart Mirror">
+                </div>
+                <div class="product-info">
+                    <h3>Vanity</h3>
+                    <span class="price">$749</span>
+                    <p>Compact design perfect for bathrooms with built-in demister technology.</p>
+                    <div class="product-actions">
+                        <button class="btn btn-sm add-to-cart" data-id="4" data-name="Vanity Smart Mirror" data-price="749" data-image="https://images.unsplash.com/photo-1556740734-7f3a7d7d0aae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80">Add to Cart</button>
+                        <button class="wishlist-btn" data-id="4"><i class="far fa-heart"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mirror Customizer -->
+    <section class="customizer" id="customizer">
+        <div class="section-title">
+            <h2>Design Your Perfect Mirror</h2>
+            <p>Customize every detail to match your style and needs.</p>
+        </div>
+        
+        <div class="customizer-container">
+            <div class="customizer-preview">
+                <div class="mirror-display">
+                    <div class="time">8:45 AM</div>
+                    <div class="weather">
+                        <i class="fas fa-sun"></i> 72°F Sunny
+                    </div>
+                </div>
+            </div>
+            
+            <div class="customizer-options">
+                <div class="option-group">
+                    <h3>Size</h3>
+                    <div class="size-options">
+                        <div class="size-option" data-size="24" data-price="599">24"</div>
+                        <div class="size-option active" data-size="32" data-price="799">32"</div>
+                        <div class="size-option" data-size="40" data-price="999">40"</div>
+                        <div class="size-option" data-size="48" data-price="1299">48"</div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <h3>Frame</h3>
+                    <div class="frame-options">
+                        <div class="frame-option frame-1 active" data-frame="black"></div>
+                        <div class="frame-option frame-2" data-frame="silver"></div>
+                        <div class="frame-option frame-3" data-frame="gold"></div>
+                        <div class="frame-option frame-4" data-frame="navy"></div>
+                        <div class="frame-option frame-5" data-frame="bronze"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <h3>Add-ons</h3>
+                    <div class="addon-options">
+                        <div class="addon-option">
+                            <input type="checkbox" id="addon1" checked data-addon="voice-control" data-price="99">
+                            <label for="addon1">Voice Control (+$99)</label>
+                        </div>
+                        <div class="addon-option">
+                            <input type="checkbox" id="addon2" data-addon="lighting" data-price="149">
+                            <label for="addon2">Smart Lighting System (+$149)</label>
+                        </div>
+                        <div class="addon-option">
+                            <input type="checkbox" id="addon3" data-addon="skin-analysis" data-price="199">
+                            <label for="addon3">Skin Analysis Camera (+$199)</label>
+                        </div>
+                        <div class="addon-option">
+                            <input type="checkbox" id="addon4" data-addon="wireless-charging" data-price="79">
+                            <label for="addon4">Wireless Charging (+$79)</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="customizer-actions">
+                    <button class="btn" id="add-custom-to-cart">Add to Cart - $<span id="custom-price">899</span></button>
+                    <button class="btn btn-outline">Save Design</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>What Our Customers Say</h2>
+            <p>Hear from people who have transformed their daily routines with our smart mirrors.</p>
+        </div>
+        
+        <div class="testimonials-slider">
+            <div class="testimonial active">
+                <p class="testimonial-text">"The Mirrora smart mirror has completely changed my morning routine. I get my news, weather, and calendar updates while I get ready, saving me so much time. The lighting is perfect for makeup application too!"</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah J." class="author-avatar">
+                    <div class="author-name">Sarah J.</div>
+                    <div class="author-title">Makeup Artist</div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"As a tech enthusiast, I appreciate how seamlessly the smart mirror integrates with my other smart home devices. The voice control works flawlessly and the display is crisp and clear even in bright bathroom lighting."</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T." class="author-avatar">
+                    <div class="author-name">Michael T.</div>
+                    <div class="author-title">Software Engineer</div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <p class="testimonial-text">"I was skeptical at first, but after using my Mirrora for a month, I can't imagine going back to a regular mirror. The skin analysis feature has helped me improve my skincare routine significantly."</p>
+                <div class="testimonial-author">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Jennifer L." class="author-avatar">
+                    <div class="author-name">Jennifer L.</div>
+                    <div class="author-title">Dermatologist</div>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <div class="slider-dot active" data-slide="0"></div>
+                <div class="slider-dot" data-slide="1"></div>
+                <div class="slider-dot" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Upgrade Your Mirror?</h2>
+        <p>Join thousands of satisfied customers who have transformed their daily routines with our smart mirrors. Free shipping and 30-day returns on all orders.</p>
+        <a href="#products" class="btn">Shop Now</a>
+    </section>
+    
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Mirrora</h3>
+                <p>Innovative smart mirrors designed to enhance your daily routine with cutting-edge technology and elegant design.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="#products">All Products</a></li>
+                    <li><a href="#customizer">Custom Mirrors</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Gift Cards</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>Subscribe to get updates on new products and special offers.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address">
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Mirrora. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+    
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Your Shopping Cart</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be added here dynamically -->
+                    <div class="empty-cart-message" style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h4>Your cart is empty</h4>
+                        <p>Start shopping to add items to your cart</p>
+                        <a href="#products" class="btn" style="margin-top: 1rem;">Browse Products</a>
+                    </div>
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="cart-summary-row">
+                        <span>Subtotal</span>
+                        <span id="cart-subtotal">$0.00</span>
+                    </div>
+                    <div class="cart-summary-row">
+                        <span>Shipping</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="cart-summary-row cart-total">
+                        <span>Total</span>
+                        <span id="cart-total">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="cart-actions">
+                    <a href="#" class="btn btn-outline close-modal">Continue Shopping</a>
+                    <a href="#" class="btn">Proceed to Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Login Modal -->
+    <div class="modal login-modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Welcome to Mirrora</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="login-tabs">
+                    <div class="login-tab active" data-tab="login">Login</div>
+                    <div class="login-tab" data-tab="signup">Sign Up</div>
+                </div>
+                
+                <form class="login-form active" id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="email" id="login-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" class="form-control" required>
+                    </div>
+                    <div class="form-actions">
+                        <a href="#" class="forgot-password">Forgot Password?</a>
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+                </form>
+                
+                <form class="login-form" id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="email" id="signup-email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" class="form-control" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn">Create Account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Testimonial Slider
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        
+        dots.forEach(dot => {
+            dot.addEventListener('click', function() {
+                const slideIndex = this.getAttribute('data-slide');
+                
+                // Hide all testimonials
+                testimonials.forEach(testimonial => {
+                    testimonial.classList.remove('active');
+                });
+                
+                // Remove active class from all dots
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                
+                // Show selected testimonial
+                testimonials[slideIndex].classList.add('active');
+                this.classList.add('active');
+            });
+        });
+        
+        // Auto-rotate testimonials
+        let currentTestimonial = 0;
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            
+            testimonials.forEach(testimonial => {
+                testimonial.classList.remove('active');
+            });
+            
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            testimonials[currentTestimonial].classList.add('active');
+            dots[currentTestimonial].classList.add('active');
+        }, 5000);
+        
+        // Cart Functionality
+        let cart = [];
+        let wishlist = [];
+        
+        // Load cart from localStorage
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            updateCartCount();
+        }
+        
+        // Load wishlist from localStorage
+        if (localStorage.getItem('wishlist')) {
+            wishlist = JSON.parse(localStorage.getItem('wishlist'));
+            updateWishlistButtons();
+        }
+        
+        // Toggle login/signup tabs
+        document.querySelectorAll('.login-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                document.querySelectorAll('.login-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.login-form').forEach(form => {
+                    form.classList.remove('active');
+                });
+                
+                this.classList.add('active');
+                document.getElementById(`${tabId}-form`).classList.add('active');
+            });
+        });
+        
+        // Add to cart from product cards
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const name = this.getAttribute('data-name');
+                const price = parseFloat(this.getAttribute('data-price'));
+                const image = this.getAttribute('data-image');
+                
+                // Check if item already exists in cart
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                showCartNotification(name);
+            });
+        });
+        
+        // Customizer functionality
+        const sizeOptions = document.querySelectorAll('.size-option');
+        const frameOptions = document.querySelectorAll('.frame-option');
+        const addonOptions = document.querySelectorAll('.addon-options input');
+        const customPriceElement = document.getElementById('custom-price');
+        
+        // Base price for custom mirror (32" size)
+        let basePrice = 799;
+        let currentPrice = basePrice;
+        
+        // Size selection
+        sizeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                sizeOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                
+                basePrice = parseFloat(this.getAttribute('data-price'));
+                updateCustomPrice();
+            });
+        });
+        
+        // Frame selection
+        frameOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                frameOptions.forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Addon selection
+        addonOptions.forEach(option => {
+            option.addEventListener('change', updateCustomPrice);
+        });
+        
+        function updateCustomPrice() {
+            let total = basePrice;
+            
+            // Get selected size price
+            const selectedSize = document.querySelector('.size-option.active');
+            if (selectedSize) {
+                total = parseFloat(selectedSize.getAttribute('data-price'));
+            }
+            
+            // Add addon prices
+            document.querySelectorAll('.addon-options input:checked').forEach(addon => {
+                total += parseFloat(addon.getAttribute('data-price'));
+            });
+            
+            currentPrice = total;
+            customPriceElement.textContent = total.toFixed(0);
+        }
+        
+        // Add custom mirror to cart
+        document.getElementById('add-custom-to-cart').addEventListener('click', function() {
+            // Get selected options
+            const size = document.querySelector('.size-option.active').textContent;
+            const frame = document.querySelector('.frame-option.active').getAttribute('data-frame');
+            
+            const addons = [];
+            document.querySelectorAll('.addon-options input:checked').forEach(addon => {
+                addons.push(addon.getAttribute('data-addon'));
+            });
+            
+            // Create custom mirror name
+            let name = `Custom ${size} Smart Mirror (${frame.charAt(0).toUpperCase() + frame.slice(1)} Frame)`;
+            
+            if (addons.length > 0) {
+                name += ` with ${addons.map(a => a.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(', ')}`;
+            }
+            
+            // Add to cart
+            cart.push({
+                id: `custom-${Date.now()}`,
+                name,
+                price: currentPrice,
+                image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1580&q=80',
+                quantity: 1,
+                custom: true,
+                size,
+                frame,
+                addons
+            });
+            
+            updateCart();
+            showCartNotification(name);
+        });
+        
+        // Wishlist functionality
+        document.querySelectorAll('.wishlist-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const heartIcon = this.querySelector('i');
+                
+                // Check if item is in wishlist
+                const index = wishlist.indexOf(id);
+                
+                if (index === -1) {
+                    // Add to wishlist
+                    wishlist.push(id);
+                    heartIcon.classList.add('fas');
+                    heartIcon.classList.remove('far');
+                    this.classList.add('active');
+                    
+                    // Show notification
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    showNotification(`${productName} added to wishlist`);
+                } else {
+                    // Remove from wishlist
+                    wishlist.splice(index, 1);
+                    heartIcon.classList.add('far');
+                    heartIcon.classList.remove('fas');
+                    this.classList.remove('active');
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            });
+        });
+        
+        function updateWishlistButtons() {
+            document.querySelectorAll('.wishlist-btn').forEach(button => {
+                const id = button.getAttribute('data-id');
+                const heartIcon = button.querySelector('i');
+                
+                if (wishlist.includes(id)) {
+                    heartIcon.classList.add('fas');
+                    heartIcon.classList.remove('far');
+                    button.classList.add('active');
+                } else {
+                    heartIcon.classList.add('far');
+                    heartIcon.classList.remove('fas');
+                    button.classList.remove('active');
+                }
+            });
+        }
+        
+        // Update cart and save to localStorage
+        function updateCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            updateCartModal();
+        }
+        
+        // Update cart count in header
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = count;
+        }
+        
+        // Update cart modal content
+        function updateCartModal() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="empty-cart-message" style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-shopping-cart" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h4>Your cart is empty</h4>
+                        <p>Start shopping to add items to your cart</p>
+                        <a href="#products" class="btn" style="margin-top: 1rem;">Browse Products</a>
+                    </div>
+                `;
+                cartSubtotal.textContent = '$0.00';
+                cartTotal.textContent = '$0.00';
+                return;
+            }
+            
+            // Calculate subtotal
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            
+            // Generate cart items HTML
+            let cartItemsHTML = '';
+            
+            cart.forEach(item => {
+                cartItemsHTML += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-info">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h4>${item.name}</h4>
+                                <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                                <div>Qty: ${item.quantity}</div>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+            
+            cartItemsContainer.innerHTML = cartItemsHTML;
+            cartSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', function() {
+                    const itemId = this.closest('.cart-item').getAttribute('data-id');
+                    removeFromCart(itemId);
+                });
+            });
+        }
+        
+        // Remove item from cart
+        function removeFromCart(itemId) {
+            cart = cart.filter(item => item.id !== itemId);
+            updateCart();
+            
+            if (cart.length === 0) {
+                document.getElementById('cart-modal').querySelector('.close-modal').click();
+            }
+        }
+        
+        // Show notification when item is added to cart
+        function showCartNotification(productName) {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--highlight)';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.2)';
+            notification.style.zIndex = '10000';
+            notification.style.display = 'flex';
+            notification.style.alignItems = 'center';
+            notification.style.gap = '10px';
+            notification.style.animation = 'fadeIn 0.3s';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${productName} added to cart</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+            
+            // Add CSS for animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(10px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translateY(0); }
+                    to { opacity: 0; transform: translateY(10px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Show general notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--highlight)';
+            notification.style.color = 'white';
+            notification.style.padding = '15px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 3px 10px rgba(0, 0, 0, 0.2)';
+            notification.style.zIndex = '10000';
+            notification.style.display = 'flex';
+            notification.style.alignItems = 'center';
+            notification.style.gap = '10px';
+            notification.style.animation = 'fadeIn 0.3s';
+            notification.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s';
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+        // Modal functionality
+        const cartModal = document.getElementById('cart-modal');
+        const loginModal = document.getElementById('login-modal');
+        
+        // Open cart modal
+        document.getElementById('cart-icon').addEventListener('click', function(e) {
+            e.preventDefault();
+            cartModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close modals
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Login/Signup buttons
+        document.getElementById('login-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        document.getElementById('signup-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Switch to signup tab
+            document.querySelector('.login-tab[data-tab="signup"]').click();
+        });
+        
+        // Form submissions
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send data to server
+            showNotification('Login successful!');
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would normally send data to server
+            showNotification('Account created successfully!');
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Initialize cart modal
+        updateCartModal();
+    </script>
+</body>
+</html>
